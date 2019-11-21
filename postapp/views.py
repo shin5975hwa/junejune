@@ -31,10 +31,11 @@ def create(request):
     post.body = request.POST['body']
     post.pub_date = timezone.datetime.now()
     post.name = User.objects.get(username = request.user.get_username())
-
-    if not post.images:
+    
+    if  not request.FILES:
         post.images = ""
         post.save()
+
     else:
         post.images = request.FILES['images']
         post.save()
